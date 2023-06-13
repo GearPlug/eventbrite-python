@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "intercom-python"
+name = "eventbrite-python"
 version = "0.1.0"
-description = "API wrapper for intercom written in Python"
+description = "API wrapper for eventbrite written in Python"
 authors = ["Juan Carlos Rios <juankrios15@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "intercom"}]
+packages = [{include = "eventbrite"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
