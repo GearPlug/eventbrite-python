@@ -3,17 +3,20 @@ from urllib.parse import urlencode
 
 import requests
 
-from eventbriteapi.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError
+from eventbrite.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError
 
 
 class Client(object):
+    URL = "https://www.eventbriteapi.com/v3/"
     AUTH_URL = "https://www.eventbrite.com/oauth/"
-    headers = {"Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json"}
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
-    def __init__(self, api_key, client_secret, redirect_uri):
+    def __init__(self, api_key, client_secret, redirect_uri, access_token=None):
         self.CLIENT_ID = api_key
         self.CLIENT_SECRET = client_secret
         self.REDIRECT_URI = redirect_uri
+        if access_token:
+            self.set_token(access_token)
 
     def authorization_url(self, state=None):
         params = {"response_type": "code", "client_id": self.CLIENT_ID, "redirect_uri": self.REDIRECT_URI}
@@ -29,7 +32,20 @@ class Client(object):
             "code": code,
             "redirect_uri": self.REDIRECT_URI,
         }
-        return self.post("token", data=body)
+        self.headers.update({"Content-Type": "application/x-www-form-urlencoded"})
+        return self.post("token", data=body, auth_url=True)
+
+    def set_token(self, token):
+        self.headers.update({"Authorization": f"Bearer {token}"})
+
+    def get_current_user(self):
+        return self.get("users/me/")
+
+    def get_user_organizations(self):
+        return self.get("users/me/organizations/")
+
+    def create_event(self, organization_id, data):
+        return self.post(f"organizations/{organization_id}/events/", data=json.dumps(data))
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)
@@ -51,8 +67,9 @@ class Client(object):
         response = self.request("PATCH", endpoint, **kwargs)
         return self.parse(response)
 
-    def request(self, method, endpoint, **kwargs):
-        return requests.request(method, self.AUTH_URL + endpoint, headers=self.headers, **kwargs)
+    def request(self, method, endpoint, auth_url=False, **kwargs):
+        url = self.AUTH_URL if auth_url else self.URL
+        return requests.request(method, url + endpoint, headers=self.headers, **kwargs)
 
     def parse(self, response):
         status_code = response.status_code

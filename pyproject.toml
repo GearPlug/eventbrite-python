@@ -5,7 +5,7 @@ description = "API wrapper for Eventbrite written in Python"
 authors = ["Juan Carlos Rios <juankrios15@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "eventbriteapi"}]
+packages = [{include = "eventbrite"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
