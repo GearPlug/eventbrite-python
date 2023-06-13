@@ -9,7 +9,14 @@ pip install eventbrite-python
 ```
 ## Usage
 ```python
-# if you have an access token:
 from eventbrite.client import Client
-client = Client(access_token=access_token)
+client = Client(api_key, client_secret, redirect_uri)
+```
+### Build authorization URL
+```python
+url = client.authorization_url(state="123456")
+```
+### Get access token
+```python
+token = client.get_access_token(code)
 ```
