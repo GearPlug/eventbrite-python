@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from eventbrite.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError
+from eventbriteapi.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError
 
 
 class Client(object):

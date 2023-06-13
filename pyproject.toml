@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "eventbrite-python"
 version = "0.1.0"
-description = "API wrapper for eventbrite written in Python"
+description = "API wrapper for Eventbrite written in Python"
 authors = ["Juan Carlos Rios <juankrios15@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "eventbrite"}]
+packages = [{include = "eventbriteapi"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
