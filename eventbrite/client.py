@@ -44,6 +44,21 @@ class Client(object):
     def get_user_organizations(self):
         return self.get("users/me/organizations/")
 
+    def list_categories(self):
+        return self.get("categories")
+
+    def list_subcategories(self):
+        return self.get("subcategories")
+
+    def list_formats(self):
+        return self.get("formats")
+
+    def list_venues(self, organization_id):
+        return self.get(f"organizations/{organization_id}/venues/")
+
+    def list_organizers(self, organization_id):
+        return self.get(f"organizations/{organization_id}/organizers/")
+
     def create_event(self, organization_id, data):
         return self.post(f"organizations/{organization_id}/events/", data=json.dumps(data))
 

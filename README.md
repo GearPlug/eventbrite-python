@@ -9,14 +9,57 @@ pip install eventbrite-python
 ```
 ## Usage
 ```python
+# if you are using Oauth2 to get an access_token:
 from eventbrite.client import Client
 client = Client(api_key, client_secret, redirect_uri)
 ```
-### Build authorization URL
+```python
+# if you have an access token:
+from eventbrite.client import Client
+client = Client(access_token=access_token)
+```
+To obtain and set an access token:
+1. ***Build authorization URL***
 ```python
 url = client.authorization_url(state="123456")
 ```
-### Get access token
+2. ***Get access token***
 ```python
 token = client.get_access_token(code)
+```
+3. ***Set token***
+```python
+client.set_token(access_token)
+```
+#### Get current user
+```python
+me = client.get_current_user()
+```
+#### Get user organizations
+```python
+organizations = client.get_user_organizations()
+```
+#### List categories
+```python
+categories = client.list_categories()
+```
+#### List subcategories
+```python
+subcategories = client.list_subcategories()
+```
+#### List formats
+```python
+formats = client.list_formats()
+```
+#### List venues
+```python
+venues = client.list_formats(organization_id)
+```
+#### List organizers
+```python
+organizers = client.list_organizers(organization_id)
+```
+#### Create event
+```python
+event = client.create_event(organization_id, data)
 ```
