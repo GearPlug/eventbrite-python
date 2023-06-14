@@ -11,7 +11,7 @@ class Client(object):
     AUTH_URL = "https://www.eventbrite.com/oauth/"
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
-    def __init__(self, api_key, client_secret, redirect_uri, access_token=None):
+    def __init__(self, api_key=None, client_secret=None, redirect_uri=None, access_token=None):
         self.CLIENT_ID = api_key
         self.CLIENT_SECRET = client_secret
         self.REDIRECT_URI = redirect_uri
