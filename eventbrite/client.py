@@ -59,8 +59,24 @@ class Client(object):
     def list_organizers(self, organization_id):
         return self.get(f"organizations/{organization_id}/organizers/")
 
+    def list_events(self, organization_id):
+        return self.get(f"organizations/{organization_id}/events/")
+
+    def get_event(self, event_id):
+        return self.get(f"events/{event_id}/")
+
     def create_event(self, organization_id, data):
         return self.post(f"organizations/{organization_id}/events/", data=json.dumps(data))
+
+    def list_webhooks(self, organization_id):
+        return self.get(f"organizations/{organization_id}/webhooks/")
+
+    def create_webhook(self, organization_id, endpoint_url, actions, event_id=""):
+        data = {"endpoint_url": endpoint_url, "actions": actions, "event_id": event_id}
+        return self.post(f"organizations/{organization_id}/webhooks/", data=json.dumps(data))
+
+    def delete_webhook(self, webhook_id):
+        return self.delete(f"webhooks/{webhook_id}/")
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)

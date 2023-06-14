@@ -31,6 +31,7 @@ token = client.get_access_token(code)
 ```python
 client.set_token(access_token)
 ```
+### Info
 #### Get current user
 ```python
 me = client.get_current_user()
@@ -59,7 +60,29 @@ venues = client.list_formats(organization_id)
 ```python
 organizers = client.list_organizers(organization_id)
 ```
+### Events
+#### List events
+```python
+events = client.list_events(organization_id)
+```
+#### Get event
+```python
+event = client.get_event(event_id)
+```
 #### Create event
 ```python
 event = client.create_event(organization_id, data)
+```
+### Webhooks
+#### List webhooks
+```python
+webhooks = client.list_webhooks(organization_id)
+```
+#### Create webhook
+```python
+webhook = client.create_webhook(organization_id,  endpoint_url, actions, event_id="")
+```
+#### Delete webhook
+```python
+deleted = client.delete_webhook(webhook_id)
 ```
