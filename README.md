@@ -73,6 +73,11 @@ event = client.get_event(event_id)
 ```python
 event = client.create_event(organization_id, data)
 ```
+### Orders
+#### Get order
+```python
+order = client.get_order(order_id)
+```
 ### Webhooks
 #### List webhooks
 ```python

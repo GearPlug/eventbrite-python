@@ -68,6 +68,9 @@ class Client(object):
     def create_event(self, organization_id, data):
         return self.post(f"organizations/{organization_id}/events/", data=json.dumps(data))
 
+    def get_order(self, order_id):
+        return self.get(f"orders/{order_id}/")
+
     def list_webhooks(self, organization_id):
         return self.get(f"organizations/{organization_id}/webhooks/")
 
