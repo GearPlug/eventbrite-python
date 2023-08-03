@@ -54,7 +54,7 @@ formats = client.list_formats()
 ```
 #### List venues
 ```python
-venues = client.list_formats(organization_id)
+venues = client.list_venues(organization_id)
 ```
 #### List organizers
 ```python
